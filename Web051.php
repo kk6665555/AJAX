@@ -1,11 +1,23 @@
 <?php
     header('Content-Type: text/xml; charset="UTF-8"');
 ?>
-<note>
-  <to>資策會</to>
-  <from>Jani</from>
-  <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>
-  <to>歐1</to>
-  <to>歐2</to>
-</note>
+<notes>
+    <note>
+            <title>Note1</title>
+            <authors>
+                <name>123</name>
+                <name>2456</name>
+                <name>3789</name>
+            </authors>
+            <price>300</price>
+    </note>
+    <note>
+            <title>Note2</title>
+            <authors>
+                  <name>111</name>
+                  <name>222</name>
+                  <name>3333</name>
+            </authors>
+            <price>1500</price>
+    </note>
+</notes>

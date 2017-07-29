@@ -62,15 +62,54 @@
         function add3() {
             xmlhttp.open('GET', 'Web051.php', true);
             xmlhttp.onreadystatechange = function () {
+                var Table = document.getElementById('table');
+                var row = Table.insertRow(-1);
+                var td = row.insertCell(0);
+                var td1 = row.insertCell(1);
+                var td2 = row.insertCell(2);
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 //                    console.log(xmlhttp.responseText);
 //                    console.log('---');
 //                    console.log(xmlhttp.responseXML);
                     var xml = xmlhttp.responseXML;
-                    var to = xml.getElementsByTagName("to");
-                    console.log(to[0].innerHTML);
-                    console.log(to[1].innerHTML);
-                    console.log(to[2].innerHTML);
+                    var notes = xml.getElementsByTagName("note");
+
+                    var Table = document.getElementById('table');
+
+
+                    for(var i = 0 ;i<notes.length;i++){
+                        var note = notes[i];
+                        var titleobj = xml.getElementsByTagName('title');
+                        var title = titleobj[0].innerHTML;
+                        var priceobj = xml.getElementsByTagName('price');
+                        var price = priceobj[0].innerHTML;
+
+                        var authorsobj = xml.getElementsByTagName('authors');
+                        var authirs= authorsobj[0];
+                        var names = authirs.getElementsByTagName('name');
+                        for(var j = 0;j<names.length;j++){
+                            var nameObj = names[j];
+                            var row = Table.insertRow(-1);
+                            console.log(nameObj.innerHTML);
+                            var tr = table.insertRow(-1);
+                            if (j==0){
+                                var td0 = tr.insertCell(0);
+                                td0.rowSpan = names.length;
+                                td0.innerHTML = title;
+                                var td = tr.insertCell(1);
+                                td1.innerHTML = nameObj.innerHTML;
+                                var td2 = tr.insertCell(2);
+                                td2.rowSpan = names.length;
+                                td2.innerHTML = price;
+                            }else{
+                                var td = tr.insertCell(0);
+                                td1.innerHTML = nameObj.innerHTML;
+                            }
+
+                        }
+
+
+                    }
                 }
 
             };
