@@ -1,0 +1,41 @@
+<script>
+    var xmlhttp = false;
+    var i = 0;
+    if(window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+
+    }else if(window.ActiveXObject){
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if(!xmlhttp){
+        alert("NO AJAX support")
+    }else{
+        alert("AJAX support")
+    }
+    xmlhttp.onreadystatechange = callback;
+    function text() {
+        if(!xmlhttp) return;
+
+        xmlhttp.open("GET","text.php",true);
+        xmlhttp.setRequestHeader("User_Agent","Text");
+        xmlhttp.send();
+    }
+    function callback() {
+        i++;
+        console.log("ok:" + i,xmlhttp.readyState);
+       var target = document.getElementById("text"+xmlhttp.readyState);
+        target.innerHTML=xmlhttp.readyState;
+
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            document.getElementById("text").innerHTML=xmlhttp.responseText;
+        }
+    }
+</script>
+
+<input type="button" onclick="text()" value="click">
+<div id="text1"></div>
+<div id="text2"></div>
+<div id="text3"></div>
+<div id="text4"></div>
+<div id="text"></div>

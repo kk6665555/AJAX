@@ -1,0 +1,96 @@
+<script>
+    var xmlhttp = false;
+    var i = 0;
+    if(window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+
+    }else if(window.ActiveXObject){
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    function add() {
+
+        var Table =  document.getElementById('table');
+        var row = Table.insertRow(-1);
+        var td = row.insertCell(0);
+        var td1 = row.insertCell(1);
+        var td2 = row.insertCell(2);
+
+        td.innerHTML="data";
+        td1.innerHTML="data1";
+        td2.innerHTML="data2";
+        document.getElementById('number').innerHTML = Table.rows.length-1;
+
+    }
+    function test() {
+        var Table =  document.getElementById('table');
+        for(var v in Table){
+            console.log(v + '=' + Table[v]);
+        }
+        console.log('------');
+        var c = Table.children;
+        console.log(c);
+
+    }
+
+    function add2() {
+        xmlhttp.open('GET', 'Web05.php', true);
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                var resp = xmlhttp.responseText.trim();
+                console.log(resp);
+                var data = resp.split(',');
+                var Table = document.getElementById('table');
+                var row = Table.insertRow(-1);
+                var td = row.insertCell(0);
+                var td1 = row.insertCell(1);
+                var td2 = row.insertCell(2);
+
+                td.innerHTML = data[0];
+                td1.innerHTML = data[1];
+                td2.innerHTML = data[2];
+
+                if(data[0]<10){
+                    td.bgColor='blue';
+                }
+            }
+
+        };
+        xmlhttp.send()
+        }
+
+        function add3() {
+            xmlhttp.open('GET', 'Web051.php', true);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//                    console.log(xmlhttp.responseText);
+//                    console.log('---');
+//                    console.log(xmlhttp.responseXML);
+                    var xml = xmlhttp.responseXML;
+                    var to = xml.getElementsByTagName("to");
+                    console.log(to[0].innerHTML);
+                    console.log(to[1].innerHTML);
+                    console.log(to[2].innerHTML);
+                }
+
+            };
+            xmlhttp.send();
+        }
+
+
+
+</script>
+<input type="button" onclick="test()" value="test">
+<input type="button" onclick="add3()" value="add">
+<span id="number"></span>
+<table border="2" width="100%" id="table">
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Tel.</th>
+
+    </tr>
+
+
+
+</table>
