@@ -7,7 +7,6 @@
             <authors>
                 <name>123</name>
                 <name>2456</name>
-                <name>3789</name>
             </authors>
             <price>300</price>
     </note>
